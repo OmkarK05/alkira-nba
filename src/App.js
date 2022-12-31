@@ -1,23 +1,16 @@
-import logo from './logo.svg';
+import { ThemeProvider } from 'react-bootstrap';
 import './App.css';
+import NbaTeams from './pages/nba-teams/NbaTeams';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider
+        breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
+        minBreakpoint="xxs"
+      >
+        <NbaTeams />
+      </ThemeProvider>
     </div>
   );
 }
