@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import './SearchBar.scoped.scss'
 
-const SearchBar = () => {
+const SearchBar = (props) => {
     const [inputValue, setInputValue] = useState('');
 
     const handleInputValue = (event) => {
         setInputValue(event.target.value);
+        props.search(event.target.value)
     }
 
     return(
