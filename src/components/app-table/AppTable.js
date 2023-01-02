@@ -6,30 +6,56 @@ import arrowUp from '../../assets/icons/caret-up-fill.svg'
 
 
 const AppTable = (props) => {
+    const [paginatedRows, setPaginatedRows] = useState(null);
     const [table, setTable] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+
     
-    useEffect(() => setTable(props['table']), [props['table']]);
+    useEffect(() => {
+        setTable(deepCopy(props['table']));
+        props['table'] && props['table']['body'] && setPaginatedRows(getPaginatedRows(deepCopy(props['table']['body']), currentPage));
+    }, [props['table']]);
 
     const handleRowClick = (row) => {
-        console.log(row);
+        props['handleRowClick'](row);
+    }
+
+    const deepCopy = (payload) => {
+        let copy = JSON.stringify(payload);
+        return JSON.parse(copy);
     }
 
     const sortTable = (sortBy, header) => {
         const columnToSort = header['name'];
-        const updateTable = table['body'].sort((a, b) => { 
+        const updateTable = deepCopy(props['table']['body']).sort((a, b) => { 
             if(sortBy === 'ascending') return a[columnToSort].localeCompare(b[columnToSort]);
             if(sortBy === 'descending') return b[columnToSort].localeCompare(a[columnToSort]);
         });
         setTable({ ...table, body: updateTable });
+        setPaginatedRows(getPaginatedRows(updateTable, currentPage));
     }
 
     const disableNext = useMemo(() => {
-       return table && table['pagination']['current_page'] === table['pagination']['total_pages'];
-    }, [table && table['pagination']['current_page'], table && table['pagination']['total_pages']])
+       return table && currentPage === table['pagination']['total_pages'];
+    }, [table && currentPage, table && table['pagination']['total_pages']])
 
     const disablePrev = useMemo(() => {
-        return table && table['pagination']['current_page'] === 1;
-     }, [table && table['pagination']['current_page'], table && table['pagination']['total_pages']])
+        return table && currentPage === 1;
+     }, [table && currentPage, table && table['pagination']['total_pages']])
+
+     
+    const handlePagination = (pagination) => {
+        let pageNumber = currentPage;
+        if(pagination === 'next') pageNumber += 1;
+        if(pagination === 'prev') pageNumber -= 1;
+
+        setCurrentPage(pageNumber);
+        setPaginatedRows(getPaginatedRows(table['body'], pageNumber));
+    }
+
+    const getPaginatedRows = (rows, pageNumber) => {
+        return rows.slice((pageNumber - 1) * 7, pageNumber * 7);
+    }
 
     return(
         <div>
@@ -58,7 +84,7 @@ const AppTable = (props) => {
                         </thead>
                         <tbody id="table-body" className="table-body" >
                         {
-                            table['body'].map((row, index) => (
+                            paginatedRows.map((row, index) => (
                                 <tr key={`table-body-row-${row['abbrevation']}-${index}`} id={`table-body-row-${row['id']}`} className="table-body-row" onClick={() => handleRowClick(row)}>
                                     <th className="table-body-cell">
                                         {row['team_name']}
@@ -83,15 +109,15 @@ const AppTable = (props) => {
                 }
                 </div>
                 {
-                    props['pagination'] && props['table'] && props['table']['pagination'] && (
+                    props['pagination'] && table && table['pagination'] && (
                         <div className="mt-3">
-                            <Button size="sm" className="px-2 py-1" disabled={disablePrev} onClick={ () => props['handlePagination']('prev') }> Prev </Button>
+                            <Button size="sm" className="px-2 py-1" disabled={disablePrev} onClick={ () => handlePagination('prev') }> Prev </Button>
 
-                            <span className="mx-1 text-bold">{props['table']['pagination']['current_page']}</span> 
+                            <span className="mx-1 text-bold">{currentPage}</span> 
                             <span className="mx-1">in</span> 
-                            <span className="mx-1 text-bold">{props['table']['pagination']['total_pages']}</span> 
+                            <span className="mx-1 text-bold">{table['pagination']['total_pages']}</span> 
 
-                            <Button size="sm" className="px-2 py-1" disabled={disableNext} onClick={ () => props['handlePagination']('next') }> Next </Button>
+                            <Button size="sm" className="px-2 py-1" disabled={disableNext} onClick={ () => handlePagination('next') }> Next </Button>
                         </div>
                     )
                 }

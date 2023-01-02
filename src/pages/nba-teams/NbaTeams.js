@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
+import AppDrawer from "../../components/app-drawer/AppDrawer";
 import AppTable from "../../components/app-table/AppTable";
 import SearchBar from "../../components/search-bar/SearchBar";
-import { getNbaTeams } from "../../services/teams";
+import { getNbaTeams, getNbaTeamGames } from "../../services/teams";
+import './NbaTeams.scoped.scss'
 
 const NbaTeams = () => {
     const [teamsData, setTeamsData] = useState(null);
     const [teams, setTeams] = useState(null);
-    const [teamSearchResults, setTeamSearchResults] = useState(null)
-    const [currentPage, setCurrentPage] = useState(1);
+    const [teamGameDetails, setTeamGameDetails] = useState(null);
+    const [showDrawer, setShowDrawer] = useState(false);
+    const [showDrawerLoader, setShowDrawerLoader] = useState(false);
 
     useEffect(() => {
         fetchNbaTeams();
@@ -16,7 +19,7 @@ const NbaTeams = () => {
 
     const fetchNbaTeams = () => {
         getNbaTeams().then((response) => {
-            const formattedTeams = response['data'].map((team) => getTeamDetails(team));
+            const formattedTeams = response['data'].map((team) => getFormattedTeam(team));
             setTeams(formattedTeams);
 
             const data = {
@@ -27,23 +30,20 @@ const NbaTeams = () => {
                     {name: 'conference', label: 'Conference'},
                     {name: 'division', label: 'Division'},
                 ],
-                body: [],
+                body: formattedTeams,
                 pagination: {}
             };
 
-            data['body'] = formattedTeams.slice((currentPage - 1) * 7, currentPage * 7);
-
             data['pagination'] = {
-                current_page : currentPage,
+                current_page : 1,
                 total_pages : Math.ceil(response['data'].length / 7)
             }
             
-            console.log(data);
             setTeamsData(data);
         })
     }
     
-    const getTeamDetails = (team) => {
+    const getFormattedTeam = (team) => {
         const teamDetails = getDefaultTeamDetails();
         teamDetails['team_name'] = team['name'];
         teamDetails['city'] = team['city'];
@@ -64,15 +64,24 @@ const NbaTeams = () => {
         }
     };
 
+    const getDefaultGameDetails = () => {
+        return {
+            date: '',
+            season: '',
+            home_team_full_name: '',
+            home_team_name: '',
+            home_team_score: '',
+            visitor_team_name: '',
+            visitor_team_score: '',
+        }
+    };
+
     const filterTeams = (teamName) => {
-        setCurrentPage(1);
-        setTeamSearchResults(null);
         if(teamName && teamName.trim().length){
             const searchResults = teams.filter((team) => team['team_name'].toLowerCase().includes(teamName.toLowerCase()));
-            setTeamSearchResults(searchResults);
             setTeamsData({
                 ...teamsData,
-                body: searchResults.slice(0, 7),
+                body: searchResults,
                 pagination: {
                     current_page : 1,
                     total_pages : Math.ceil(searchResults.length / 7)
@@ -81,7 +90,7 @@ const NbaTeams = () => {
         } else {
             setTeamsData({
                 ...teamsData,
-                body: teams.slice(0, 7),
+                body: teams,
                 pagination: {
                     current_page : 1,
                     total_pages : Math.ceil(teams.length / 7)
@@ -90,22 +99,33 @@ const NbaTeams = () => {
         }
     };
 
-    const handlePagination = (pagination) => {
-        let pageNumber = currentPage;
-        if(pagination === 'next') pageNumber += 1;
-        if(pagination === 'prev') pageNumber -= 1;
+    const fetchTeamGames = (team) => {
+        setShowDrawerLoader(true);
+        getNbaTeamGames([team['id']]).then(response => {
+            const gameDetails =  getFormattedGame(response['data'][0]);
+            setTeamGameDetails({...gameDetails});
+            setShowDrawer(true);
+        }).finally(() => setShowDrawerLoader(false));
+    }
 
-        setTeamsData({
-            ...teamsData,
-            body: (teamSearchResults ? teamSearchResults : teams).slice((pageNumber - 1) * 7, pageNumber * 7),
-            pagination: {
-                ...teamsData['pagination'],
-                current_page : pageNumber,
-            }
-        })  
+    const closeDrawer = () => {
+        setShowDrawer(false);
+    }
 
-        setCurrentPage(pageNumber);
-        console.log((teamSearchResults ? teamSearchResults : teams).slice((pageNumber - 1) * 7, pageNumber * 7));
+    const getFormattedGame = (game) => {
+        const teamDetails = getDefaultGameDetails();
+        teamDetails['date'] = getFormattedDate(game['date']);
+        teamDetails['season'] = game['season'];
+        teamDetails['home_team_full_name'] = game['home_team']['full_name'];
+        teamDetails['home_team_name'] = game['home_team']['name'];
+        teamDetails['home_team_score'] = game['home_team_score'];
+        teamDetails['visitor_team_name'] = game['visitor_team']['full_name'];
+        teamDetails['visitor_team_score'] = game['visitor_team_score'];
+        return teamDetails;
+    };
+
+    const getFormattedDate = (date) => {
+        return date.split('T')[0];
     }
 
     return(
@@ -114,8 +134,43 @@ const NbaTeams = () => {
                 <SearchBar search={filterTeams} />
             </Col>
             <Col xl={10}>
-                <AppTable table={teamsData} pagination handlePagination={handlePagination} />
+                <AppTable table={teamsData} pagination handleRowClick={fetchTeamGames} />
             </Col>
+            {
+                showDrawer && (
+                    <AppDrawer direction='right' width='350px' close={closeDrawer}>
+                        <div className="team-game-detail">
+                            <div className="team-game-detail-title">Team Full Name</div>
+                            <div className="team-game-detail-value">{teamGameDetails['home_team_full_name']}</div>
+                        </div>
+                        <div className="team-game-detail">
+                            <div className="team-game-detail-title">Total Games in {teamGameDetails['season']}</div>
+                            <div className="team-game-detail-value">88</div>
+                        </div>
+                        <div className="team-game-detail-section-title">Random Game Details:</div>
+                        <div className="team-game-detail">
+                            <div className="team-game-detail-title">Date</div>
+                            <div className="team-game-detail-value">{teamGameDetails['date']}</div>
+                        </div>
+                        <div className="team-game-detail">
+                            <div className="team-game-detail-title">Home Team</div>
+                            <div className="team-game-detail-value">{teamGameDetails['home_team_name']}</div>
+                        </div>
+                        <div className="team-game-detail">
+                            <div className="team-game-detail-title">Home Team Score</div>
+                            <div className="team-game-detail-value">{teamGameDetails['home_team_score']}</div>
+                        </div>
+                        <div className="team-game-detail">
+                            <div className="team-game-detail-title">Visitor Team</div>
+                            <div className="team-game-detail-value">{teamGameDetails['visitor_team_name']}</div>
+                        </div>
+                        <div className="team-game-detail">
+                            <div className="team-game-detail-title">Visitor Team Score</div>
+                            <div className="team-game-detail-value">{teamGameDetails['visitor_team_score']}</div>
+                        </div>
+                    </AppDrawer>
+                )
+            }
         </Row>
     )
 }

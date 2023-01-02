@@ -1,0 +1,22 @@
+.team-game-detail{
+    display: flex;
+    align-items: center;
+    padding: 8px 0;
+
+    .team-game-detail-title{
+        width: 50%;
+        text-align: left;
+    }
+
+    .team-game-detail-value{
+        width: 50%;
+        text-align: left;
+    }
+}
+
+.team-game-detail-section-title{
+    font-weight: 700;
+    text-align: left;
+    padding-top: 18px;
+    padding-bottom: 12px;
+}
