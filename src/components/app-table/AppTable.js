@@ -1,8 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Button } from "react-bootstrap";
 import './AppTable.scoped.scss';
-import arrowDown from '../../assets/icons/caret-down-fill.svg'
-import arrowUp from '../../assets/icons/caret-up-fill.svg'
+import arrowDown from '../../assets/icons/caret-down-fill.svg';
+import arrowUp from '../../assets/icons/caret-up-fill.svg';
+import arrowRight from '../../assets/icons/chevron-right.svg';
+import arrowLeft from '../../assets/icons/chevron-left.svg';
 
 
 const AppTable = (props) => {
@@ -110,14 +112,14 @@ const AppTable = (props) => {
                 </div>
                 {
                     props['pagination'] && table && table['pagination'] && (
-                        <div className="mt-3">
-                            <Button size="sm" className="px-2 py-1" disabled={disablePrev} onClick={ () => handlePagination('prev') }> Prev </Button>
+                        <div className="mt-3 d-flex justify-content-end align-items-center">
+                            <Button size="sm" className="p-1" disabled={disablePrev} onClick={ () => handlePagination('prev') }> <img className="arrow-left" alt="Previous" src={arrowLeft} /> </Button>
 
-                            <span className="mx-1 text-bold">{currentPage}</span> 
+                            <span className="mx-2 text-bold">{currentPage}</span> 
                             <span className="mx-1">in</span> 
-                            <span className="mx-1 text-bold">{table['pagination']['total_pages']}</span> 
+                            <span className="mx-2 text-bold">{table['pagination']['total_pages']}</span> 
 
-                            <Button size="sm" className="px-2 py-1" disabled={disableNext} onClick={ () => handlePagination('next') }> Next </Button>
+                            <Button size="sm" className="p-1" disabled={disableNext} onClick={ () => handlePagination('next') }> <img className="arrow-right" alt="Next" src={arrowRight} /> </Button>
                         </div>
                     )
                 }
