@@ -110,6 +110,7 @@ const NbaTeams = () => {
 
     const closeDrawer = () => {
         setShowDrawer(false);
+        setTeamGameDetails(null);
     }
 
     const getFormattedGame = (game) => {
@@ -124,6 +125,11 @@ const NbaTeams = () => {
         return teamDetails;
     };
 
+    /**
+     * Method to get date from UTC date format
+     * @param date {String} - UTC date
+     * @returns {String} - date in YYYY-MM-DD format
+     */
     const getFormattedDate = (date) => {
         return date.split('T')[0];
     }
@@ -138,7 +144,7 @@ const NbaTeams = () => {
             </Col>
             {
                 showDrawer && (
-                    <AppDrawer direction='right' width='350px' close={closeDrawer}>
+                    <AppDrawer direction='right' width='350px' header={teamGameDetails['home_team_name']} close={closeDrawer}>
                         <div className="team-game-detail">
                             <div className="team-game-detail-title">Team Full Name</div>
                             <div className="team-game-detail-value">{teamGameDetails['home_team_full_name']}</div>
