@@ -34,6 +34,7 @@ const AppTable = (props) => {
             if(sortBy === 'descending') return b[columnToSort].localeCompare(a[columnToSort]);
         });
         setTable({ ...table, body: updateTable });
+        console.log(getPaginatedRows(updateTable, currentPage));
         setPaginatedRows(getPaginatedRows(updateTable, currentPage));
     }
 
@@ -74,9 +75,9 @@ const AppTable = (props) => {
                                                     <p className="table-header-cell-title mb-0">
                                                         {header['label']}
                                                     </p>
-                                                    <div className="table-column-sorting-icon">
-                                                        <img alt="Arrow up" className="arrow-up" src={arrowUp} onClick={() => sortTable('ascending', header)}/>
-                                                        <img alt="Arrow Down" className="arrow-down" src={arrowDown} onClick={() => sortTable('descending', header)} />
+                                                    <div id="app-table-sorting-icon" className="table-column-sorting-icon">
+                                                        <img id="app-table-sort-ascending-icon" alt="Arrow up" className="arrow-up" src={arrowUp} onClick={() => sortTable('ascending', header)}/>
+                                                        <img id="app-table-sort-descending-icon" alt="Arrow Down" className="arrow-down" src={arrowDown} onClick={() => sortTable('descending', header)} />
                                                     </div>
                                                 </div>
                                             </th>
@@ -87,22 +88,22 @@ const AppTable = (props) => {
                         <tbody id="table-body" className="table-body" >
                         {
                             paginatedRows.map((row, index) => (
-                                <tr key={`table-body-row-${row['abbrevation']}-${index}`} id={`table-body-row-${row['id']}`} className="table-body-row" onClick={() => handleRowClick(row)}>
-                                    <th className="table-body-cell">
+                                <tr key={`table-body-row-${row['abbrevation']}-${index}`} id="table-body-row" className="table-body-row" onClick={() => handleRowClick(row)}>
+                                    <td className="table-body-cell">
                                         {row['team_name']}
-                                    </th>
-                                    <th className="table-body-cell">
+                                    </td>
+                                    <td className="table-body-cell">
                                         {row['city']}
-                                    </th>
-                                    <th className="table-body-cell">
+                                    </td>
+                                    <td className="table-body-cell">
                                         {row['abbreviation']}
-                                    </th>
-                                    <th className="table-body-cell">
+                                    </td>
+                                    <td className="table-body-cell">
                                         {row['conference']}
-                                    </th>
-                                    <th className="table-body-cell">
+                                    </td>
+                                    <td className="table-body-cell">
                                         {row['division']}
-                                    </th>
+                                    </td>
                                 </tr>
                             ))
                         }
@@ -113,13 +114,13 @@ const AppTable = (props) => {
                 {
                     props['pagination'] && table && table['pagination'] && (
                         <div className="mt-3 d-flex justify-content-end align-items-center">
-                            <Button size="sm" className="p-1" disabled={disablePrev} onClick={ () => handlePagination('prev') }> <img className="arrow-left" alt="Previous" src={arrowLeft} /> </Button>
-
-                            <span className="mx-2 text-bold">{currentPage}</span> 
-                            <span className="mx-1">in</span> 
-                            <span className="mx-2 text-bold">{table['pagination']['total_pages']}</span> 
-
-                            <Button size="sm" className="p-1" disabled={disableNext} onClick={ () => handlePagination('next') }> <img className="arrow-right" alt="Next" src={arrowRight} /> </Button>
+                            <Button id='app-table-pagination-previous-button' size="sm" className="p-1" disabled={disablePrev} onClick={ () => handlePagination('prev') }> <img className="arrow-left" alt="Previous" src={arrowLeft} /> </Button>
+                            <span id="app-table-pagination-text">
+                                <span className="mx-2 text-bold">{currentPage}</span> 
+                                <span className="mx-1">in</span> 
+                                <span className="mx-2 text-bold">{table['pagination']['total_pages']}</span> 
+                            </span>
+                            <Button id='app-table-pagination-next-button' size="sm" className="p-1" disabled={disableNext} onClick={ () => handlePagination('next') }> <img className="arrow-right" alt="Next" src={arrowRight} /> </Button>
                         </div>
                     )
                 }
