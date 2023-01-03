@@ -34,7 +34,6 @@ const AppTable = (props) => {
             if(sortBy === 'descending') return b[columnToSort].localeCompare(a[columnToSort]);
         });
         setTable({ ...table, body: updateTable });
-        console.log(getPaginatedRows(updateTable, currentPage));
         setPaginatedRows(getPaginatedRows(updateTable, currentPage));
     }
 
