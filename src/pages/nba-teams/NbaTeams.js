@@ -145,34 +145,34 @@ const NbaTeams = () => {
             {
                 showDrawer && (
                     <AppDrawer direction='right' width='350px' header={teamGameDetails['home_team_name']} close={closeDrawer}>
-                        <div className="team-game-detail">
-                            <div className="team-game-detail-title">Team Full Name</div>
-                            <div className="team-game-detail-value">{teamGameDetails['home_team_full_name']}</div>
+                        <div id="app-drawer-team-full-name" className="team-game-detail">
+                            <div id="app-drawer-team-full-name-title" className="team-game-detail-title">Team Full Name</div>
+                            <div id="app-drawer-team-full-name-value" className="team-game-detail-value">{teamGameDetails['home_team_full_name']}</div>
                         </div>
-                        <div className="team-game-detail">
-                            <div className="team-game-detail-title">Total Games in {teamGameDetails['season']}</div>
-                            <div className="team-game-detail-value">88</div>
+                        <div id="app-drawer-team-game-detail" className="team-game-detail">
+                            <div id="app-drawer-team-game-detail-title" className="team-game-detail-title">Total Games in {teamGameDetails['season']}</div>
+                            <div id="app-drawer-team-game-detail-value" className="team-game-detail-value">88</div>
                         </div>
                         <div className="team-game-detail-section-title">Random Game Details:</div>
-                        <div className="team-game-detail">
-                            <div className="team-game-detail-title">Date</div>
-                            <div className="team-game-detail-value">{teamGameDetails['date']}</div>
+                        <div id="team-game-detail-date" className="team-game-detail">
+                            <div id="team-game-detail-date-title" className="team-game-detail-title">Date</div>
+                            <div id="team-game-detail-date-value" className="team-game-detail-value">{teamGameDetails['date']}</div>
                         </div>
-                        <div className="team-game-detail">
-                            <div className="team-game-detail-title">Home Team</div>
-                            <div className="team-game-detail-value">{teamGameDetails['home_team_name']}</div>
+                        <div id="team-game-detail-home-team" className="team-game-detail">
+                            <div id="team-game-detail-home-team-title" className="team-game-detail-title">Home Team</div>
+                            <div id="team-game-detail-home-team-value" className="team-game-detail-value">{teamGameDetails['home_team_name']}</div>
                         </div>
-                        <div className="team-game-detail">
-                            <div className="team-game-detail-title">Home Team Score</div>
-                            <div className="team-game-detail-value">{teamGameDetails['home_team_score']}</div>
+                        <div id="team-game-detail-home-team-score" className="team-game-detail">
+                            <div id="team-game-detail-home-team-score-title" className="team-game-detail-title">Home Team Score</div>
+                            <div id="team-game-detail-home-team-score-value" className="team-game-detail-value">{teamGameDetails['home_team_score']}</div>
                         </div>
-                        <div className="team-game-detail">
-                            <div className="team-game-detail-title">Visitor Team</div>
-                            <div className="team-game-detail-value">{teamGameDetails['visitor_team_name']}</div>
+                        <div id="team-game-detail-visitor-team" className="team-game-detail">
+                            <div id="team-game-detail-visitor-team-title" className="team-game-detail-title">Visitor Team</div>
+                            <div id="team-game-detail-visitor-team-value" className="team-game-detail-value">{teamGameDetails['visitor_team_name']}</div>
                         </div>
-                        <div className="team-game-detail">
-                            <div className="team-game-detail-title">Visitor Team Score</div>
-                            <div className="team-game-detail-value">{teamGameDetails['visitor_team_score']}</div>
+                        <div id="team-game-detail-visitor-team-score" className="team-game-detail">
+                            <div id="team-game-detail-visitor-team-score-title" className="team-game-detail-title">Visitor Team Score</div>
+                            <div id="team-game-detail-visitor-team-score-value" className="team-game-detail-value">{teamGameDetails['visitor_team_score']}</div>
                         </div>
                     </AppDrawer>
                 )
