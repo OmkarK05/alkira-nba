@@ -3,9 +3,9 @@ import './AppDrawer.scoped.scss';
 import cross from '../../assets/icons/x.svg'
 
 const AppDrawer = (props) => {
-    // Props
-    useEffect(() => console.log(props.children))
-
+    /**
+     * Cached method to get drawer style. It computes and returns styles when props width or direction changes
+     */
     const getDrawerStyle = useMemo(() => {
         return{
             width: props.width || '300px',
@@ -15,9 +15,9 @@ const AppDrawer = (props) => {
 
     return(
         <div id="app-drawer" className="app-drawer-container">
-            <div className="drawer" style={getDrawerStyle}>
-                <div id="app-drawer-header-block" className="drawer-header px-3 py-2">
-                    <p id="app-drawer-header-title" className="header-title mb-0 pr-2">{props['header']}</p>
+            <div className="drawer bg-white" style={getDrawerStyle}>
+                <div id="app-drawer-header-block" className="drawer-header bg-secondary px-3 py-2">
+                    <p id="app-drawer-header-title" className="header-title mb-0 pr-2 font-large text-dark">{props['header']}</p>
                     <img id="app-drawer-header-close-button" className="close-icon" alt="close" src={cross} onClick={props['close']}/>
                 </div>
                 <div className="drawer-content px-3 py-2">

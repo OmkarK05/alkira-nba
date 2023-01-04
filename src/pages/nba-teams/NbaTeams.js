@@ -135,8 +135,11 @@ const NbaTeams = () => {
     }
 
     return(
-        <Row className="justify-content-center">
-            <Col xl={10} className="py-5">
+        <Row className="justify-content-center py-4">
+            <Col xl={10}>
+                <p className="nba-teams-title text-primary font-weight-bold pb-2 font-largest">NBA Teams</p>
+            </Col>
+            <Col xl={10} className="mb-4 pb-2">
                 <SearchBar search={filterTeams} />
             </Col>
             <Col xl={10}>
@@ -155,24 +158,24 @@ const NbaTeams = () => {
                         </div>
                         <div className="team-game-detail-section-title">Random Game Details:</div>
                         <div id="team-game-detail-date" className="team-game-detail">
-                            <div id="team-game-detail-date-title" className="team-game-detail-title">Date</div>
-                            <div id="team-game-detail-date-value" className="team-game-detail-value">{teamGameDetails['date']}</div>
+                            <div id="team-game-detail-date-title" className="team-game-detail-title font-wight-bold">Date</div>
+                            <div id="team-game-detail-date-value" className="team-game-detail-value font-wight-bold">{teamGameDetails['date']}</div>
                         </div>
                         <div id="team-game-detail-home-team" className="team-game-detail">
-                            <div id="team-game-detail-home-team-title" className="team-game-detail-title">Home Team</div>
-                            <div id="team-game-detail-home-team-value" className="team-game-detail-value">{teamGameDetails['home_team_name']}</div>
+                            <div id="team-game-detail-home-team-title" className="team-game-detail-title font-wight-bold">Home Team</div>
+                            <div id="team-game-detail-home-team-value" className="team-game-detail-value font-wight-bold">{teamGameDetails['home_team_name']}</div>
                         </div>
                         <div id="team-game-detail-home-team-score" className="team-game-detail">
-                            <div id="team-game-detail-home-team-score-title" className="team-game-detail-title">Home Team Score</div>
-                            <div id="team-game-detail-home-team-score-value" className="team-game-detail-value">{teamGameDetails['home_team_score']}</div>
+                            <div id="team-game-detail-home-team-score-title" className="team-game-detail-title font-wight-bold">Home Team Score</div>
+                            <div id="team-game-detail-home-team-score-value" className="team-game-detail-value font-wight-bold">{teamGameDetails['home_team_score']}</div>
                         </div>
                         <div id="team-game-detail-visitor-team" className="team-game-detail">
-                            <div id="team-game-detail-visitor-team-title" className="team-game-detail-title">Visitor Team</div>
-                            <div id="team-game-detail-visitor-team-value" className="team-game-detail-value">{teamGameDetails['visitor_team_name']}</div>
+                            <div id="team-game-detail-visitor-team-title" className="team-game-detail-title font-wight-bold">Visitor Team</div>
+                            <div id="team-game-detail-visitor-team-value" className="team-game-detail-value font-wight-bold">{teamGameDetails['visitor_team_name']}</div>
                         </div>
                         <div id="team-game-detail-visitor-team-score" className="team-game-detail">
-                            <div id="team-game-detail-visitor-team-score-title" className="team-game-detail-title">Visitor Team Score</div>
-                            <div id="team-game-detail-visitor-team-score-value" className="team-game-detail-value">{teamGameDetails['visitor_team_score']}</div>
+                            <div id="team-game-detail-visitor-team-score-title" className="team-game-detail-title font-wight-bold">Visitor Team Score</div>
+                            <div id="team-game-detail-visitor-team-score-value" className="team-game-detail-value font-wight-bold">{teamGameDetails['visitor_team_score']}</div>
                         </div>
                     </AppDrawer>
                 )
