@@ -6,12 +6,22 @@
     .team-game-detail-title{
         width: 50%;
         text-align: left;
+        font-size: 16px;
+        color: var(--bs-dark);
     }
 
     .team-game-detail-value{
         width: 50%;
         text-align: left;
     }
+
+    .font-wight-bold{
+        font-weight: 600;
+    }
+}
+
+.nba-teams-title{
+    font-weight: bold;
 }
 
 .team-game-detail-section-title{

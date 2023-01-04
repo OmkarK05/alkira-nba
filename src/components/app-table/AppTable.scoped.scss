@@ -1,13 +1,10 @@
 .app-table{
     width: 100%;
     margin: 0 auto;
-    table-layout: auto;
+    table-layout: fixed;
     border-collapse: collapse;
 
     .table-header{
-        background-color: #074684;
-        color: #ffffff;
-
         .table-header-cell{
             padding: 10px 8px;
             font-weight: normal;
@@ -37,19 +34,18 @@
 
     .table-body{
         .table-body-row{
-            border-top: 4px solid #ffffff;
+            border-top: 4px solid var(--bs-white);
             cursor: pointer;
 
             &:hover{
                 .table-body-cell{
-                    background-color: #d4d6d7;
+                    background-color: var(--bs-secondary) !important;
                 }
             }
 
             .table-body-cell{
                 padding: 8px;
                 font-weight: normal;
-                background-color: #F8FBFD;
                 margin: 3px 0;
             }
         }
@@ -58,7 +54,7 @@
 }
 
 .table-container{
-    min-height: 360px;
+    min-height: 380px;
 }
 
 

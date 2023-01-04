@@ -13,17 +13,14 @@
         position: fixed;
         z-index: 999;
         top: 0;
-        background-color: #ffffff;
 
         .drawer-header{
             display: flex;
             align-items: center;
-            background-color: #D8DFE4;
 
             .header-title{
                 width: calc(100% - 24px);
                 text-align: left;
-                font-size: 22px;
                 font-weight: 700;
             }
 
