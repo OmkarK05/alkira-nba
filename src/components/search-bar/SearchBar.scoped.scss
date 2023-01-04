@@ -1,6 +1,6 @@
 .searchBar{
     .search-bar-container{
-        width: 250px;
+        width: 350px;
         display: flex;
         padding: 4px 8px;
         border-radius: 4px;
@@ -13,7 +13,7 @@
     .searchBarInput{
         border: none;
         outline: none;
-        width: calc(250px - 32px);
+        width: calc(300px - 32px);
 
         &:focus{
             outline: none;
