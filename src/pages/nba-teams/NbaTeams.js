@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import AppDrawer from "../../components/app-drawer/AppDrawer";
+import AppLoader from "../../components/app-loader/AppLoader";
 import AppTable from "../../components/app-table/AppTable";
 import SearchBar from "../../components/search-bar/SearchBar";
 import { getNbaTeams, getNbaTeamGames } from "../../services/teams";
@@ -12,12 +13,15 @@ const NbaTeams = () => {
   const [teamGameDetails, setTeamGameDetails] = useState(null);
   const [showDrawer, setShowDrawer] = useState(false);
   const [showDrawerLoader, setShowDrawerLoader] = useState(false);
+  const [loaderMessage, setLoaderMessage] = useState("");
 
   useEffect(() => {
     fetchNbaTeams();
   },[]);
 
   const fetchNbaTeams = () => {
+    setShowDrawerLoader(true);
+    setLoaderMessage("Getting Teams...");
     getNbaTeams().then((response) => {
       const formattedTeams = response["data"].map((team) => getFormattedTeam(team));
       setTeams(formattedTeams);
@@ -40,7 +44,7 @@ const NbaTeams = () => {
       }
             
       setTeamsData(data);
-    })
+    }).finally(() => setShowDrawerLoader(false))
   }
     
   const getFormattedTeam = (team) => {
@@ -101,6 +105,7 @@ const NbaTeams = () => {
 
   const fetchTeamGames = (team) => {
     setShowDrawerLoader(true);
+    setLoaderMessage("Getting Team Details...");
     getNbaTeamGames([team["id"]]).then(response => {
       const gameDetails =  getFormattedGame(response["data"][0]);
       setTeamGameDetails({...gameDetails});
@@ -135,7 +140,7 @@ const NbaTeams = () => {
   }
 
   return(
-    <Row className="justify-content-center py-4">
+    <Row className="justify-content-center py-4 px-3 position-relative g-0">
       <Col xl={10}>
         <p className="nba-teams-title text-primary font-weight-bold pb-2 font-largest">NBA Teams</p>
       </Col>
@@ -180,11 +185,7 @@ const NbaTeams = () => {
           </AppDrawer>
         )
       }
-      {
-        <div className="loader">
-
-        </div>
-      }
+      {showDrawerLoader && <AppLoader fullScreen message={loaderMessage} />}
     </Row>
   )
 }
