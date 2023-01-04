@@ -1,0 +1,12 @@
+$theme-colors: (
+    "primary": rgb(7, 70, 132),
+    "secondary": rgb(242, 242, 242),
+    "tertiary": rgb(248, 251, 253),
+    "info": tomato,
+    "danger": teal,
+    "dark": rgba(0, 0, 0),
+    "white": #ffffff
+);
+
+
+@import "~bootstrap/scss/bootstrap.scss";

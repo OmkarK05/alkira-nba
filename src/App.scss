@@ -1,0 +1,16 @@
+@import "./assets/scss/custom.scss";
+
+$fontSizes : (
+    'small': 14px,
+    'regular': 16px,
+    'medium': 18px,
+    'large': 22px,
+    'larger': 24px,
+    'largest': 32px,
+);
+
+@each $font, $fontSize in $fontSizes{
+    .font-#{$font} {
+        font-size: $fontSize !important;
+    }
+}
