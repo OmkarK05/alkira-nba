@@ -23,17 +23,17 @@ const NbaTeams = () => {
     setShowDrawerLoader(true);
     setLoaderMessage("Getting Teams...");
     getNbaTeams().then((response) => {
-      const formattedTeams = response["data"].map((team) => getFormattedTeam(team));
+      const headers =  [
+        {name: "team_name", label: "Team Name"},
+        {name: "city", label: "City"},
+        {name: "abbreviation", label: "Abbreviation"},
+        {name: "conference", label: "Conference"},
+        {name: "division", label: "Division"},
+      ];
+      const formattedTeams = response["data"].map((team) => convertTeamIntoTableRow(team));
       setTeams(formattedTeams);
-
       const data = {
-        headers: [
-          {name: "team_name", label: "Team Name"},
-          {name: "city", label: "City"},
-          {name: "abbreviation", label: "Abbreviation"},
-          {name: "conference", label: "Conference"},
-          {name: "division", label: "Division"},
-        ],
+        headers,
         body: formattedTeams,
         pagination: {}
       };
@@ -47,27 +47,19 @@ const NbaTeams = () => {
     }).finally(() => setShowDrawerLoader(false))
   }
     
-  const getFormattedTeam = (team) => {
-    const teamDetails = getDefaultTeamDetails();
-    teamDetails["team_name"] = team["name"];
-    teamDetails["city"] = team["city"];
-    teamDetails["abbreviation"] = team["abbreviation"];
-    teamDetails["conference"] = team["conference"];
-    teamDetails["division"] = team["division"];
-    teamDetails["id"] = team["id"]
-    return teamDetails;
+  const convertTeamIntoTableRow = (team) => {
+    const row = {
+      id: team["id"],
+      cells: [],
+    };
+    row["cells"].push({ "value": team["name"] });
+    row["cells"].push({ "value": team["city"] });
+    row["cells"].push({ "value": team["abbreviation"] });
+    row["cells"].push({ "value": team["conference"] });
+    row["cells"].push({ "value": team["division"] });
+    return row;
   };
-
-  const getDefaultTeamDetails = () => {
-    return {
-      team_name: "",
-      city: "",
-      abbreviation: "",
-      conference: "",
-      division: "",
-    }
-  };
-
+  
   const getDefaultGameDetails = () => {
     return {
       date: "",
@@ -82,7 +74,7 @@ const NbaTeams = () => {
 
   const filterTeams = (teamName) => {
     if(teamName && teamName.trim().length){
-      const searchResults = teams.filter((team) => team["team_name"].toLowerCase().includes(teamName.toLowerCase()));
+      const searchResults = teams.filter((team) => team["cells"][0]["value"].toLowerCase().includes(teamName.toLowerCase()));
       setTeamsData({
         ...teamsData,
         body: searchResults,

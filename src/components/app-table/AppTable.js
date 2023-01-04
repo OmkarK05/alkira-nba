@@ -19,6 +19,7 @@ const AppTable = (props) => {
      */
   useEffect(() => {
     setTable(deepCopy(props["table"]));
+    console.log(props["table"]);
     props["table"] && props["table"]["body"] && setPaginatedRows(getPaginatedRows(deepCopy(props["table"]["body"]), currentPage));
   }, [props["table"]]);
 
@@ -35,11 +36,10 @@ const AppTable = (props) => {
      * @param {String} sortBy - ascending/descending
      * @param {Object} header - header which needs to be sorted
      */
-  const sortTable = (sortBy, header) => {
-    const columnToSort = header["name"];
+  const sortTable = (sortBy, headerIndex) => {
     const updateTable = deepCopy(props["table"]["body"]).sort((a, b) => { 
-      if(sortBy === "ascending") return a[columnToSort].localeCompare(b[columnToSort]);
-      if(sortBy === "descending") return b[columnToSort].localeCompare(a[columnToSort]);
+      if(sortBy === "ascending") return a["cells"][headerIndex]["value"].localeCompare(b["cells"][headerIndex]["value"]);
+      if(sortBy === "descending") return b["cells"][headerIndex]["value"].localeCompare(a["cells"][headerIndex]["value"]);
     });
     setTable({ ...table, body: updateTable });
     setPaginatedRows(getPaginatedRows(updateTable, currentPage));
@@ -86,51 +86,42 @@ const AppTable = (props) => {
     <div>
       <div className="table-container">
         { 
-          table &&
-                    (<table  id="app-table" className="app-table">
-                      <thead id="table-header" className="table-header">
-                        <tr>
-                          {
-                            table["headers"].map((header) => (
-                              <th key={`table-header-${header["label"]}`} className="table-header-cell bg-primary text-white">
-                                <div className="d-flex align-items-center">
-                                  <p className="table-header-cell-title mb-0 font-medium">
-                                    {header["label"]}
-                                  </p>
-                                  <div id="app-table-sorting-icon" className="table-column-sorting-icon">
-                                    <img id="app-table-sort-ascending-icon" alt="Arrow up" className="arrow-up" src={arrowUp} onClick={() => sortTable("ascending", header)}/>
-                                    <img id="app-table-sort-descending-icon" alt="Arrow Down" className="arrow-down" src={arrowDown} onClick={() => sortTable("descending", header)} />
-                                  </div>
-                                </div>
-                              </th>
-                            ))
-                          }
-                        </tr>
-                      </thead>
-                      <tbody id="table-body" className="table-body" >
-                        {
-                          paginatedRows.map((row, index) => (
-                            <tr key={`table-body-row-${row["abbrevation"]}-${index}`} id="table-body-row" className="table-body-row" onClick={() => handleRowClick(row)}>
-                              <td className="table-body-cell bg-tertiary font-medium">
-                                {row["team_name"]}
-                              </td>
-                              <td className="table-body-cell bg-tertiary font-medium">
-                                {row["city"]}
-                              </td>
-                              <td className="table-body-cell bg-tertiary font-medium">
-                                {row["abbreviation"]}
-                              </td>
-                              <td className="table-body-cell bg-tertiary font-medium">
-                                {row["conference"]}
-                              </td>
-                              <td className="table-body-cell bg-tertiary font-medium">
-                                {row["division"]}
-                              </td>
-                            </tr>
-                          ))
-                        }
-                      </tbody>
-                    </table>)
+          table &&  (<table  id="app-table" className="app-table">
+            <thead id="table-header" className="table-header">
+              <tr>
+                {
+                  table["headers"].map((header, index) => (
+                    <th key={`table-header-${header["label"]}`} className="table-header-cell bg-primary text-white">
+                      <div className="d-flex align-items-center">
+                        <p className="table-header-cell-title mb-0 font-medium">
+                          {header["label"]}
+                        </p>
+                        <div id="app-table-sorting-icon" className="table-column-sorting-icon">
+                          <img id="app-table-sort-ascending-icon" alt="Arrow up" className="arrow-up" src={arrowUp} onClick={() => sortTable("ascending", index)}/>
+                          <img id="app-table-sort-descending-icon" alt="Arrow Down" className="arrow-down" src={arrowDown} onClick={() => sortTable("descending", index)} />
+                        </div>
+                      </div>
+                    </th>
+                  ))
+                }
+              </tr>
+            </thead>
+            <tbody id="table-body" className="table-body" >
+              {
+                paginatedRows.map((row, index) => (
+                  <tr key={`table-body-row-${row["abbrevation"]}-${index}`} id="table-body-row" className="table-body-row" onClick={() => handleRowClick(row)}>
+                    {
+                      row["cells"].map((cell) => (
+                        <td key={`table-body-cell-${row["id"]}-${cell["value"]}`} className="table-body-cell bg-tertiary font-medium">
+                          { cell["value"] }
+                        </td>
+                      ))
+                    }
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>)
         }
       </div>
       {
