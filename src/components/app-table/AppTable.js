@@ -98,12 +98,8 @@ const AppTable = (props) => {
                                     {header["label"]}
                                   </p>
                                   <div id="app-table-sorting-icon" className="table-column-sorting-icon">
-                                    <div id="app-table-sort-ascending-icon"  onClick={() => sortTable("ascending", header)}>
-                                        <img alt="Arrow up" className="arrow-up" src={arrowUp} />
-                                    </div>
-                                    <div id="app-table-sort-descending-icon"  onClick={() => sortTable("descending", header)}>
-                                        <img alt="Arrow Down" className="arrow-down" src={arrowDown} />
-                                    </div>
+                                    <img id="app-table-sort-ascending-icon" alt="Arrow up" className="arrow-up" src={arrowUp} onClick={() => sortTable("ascending", header)}/>
+                                    <img id="app-table-sort-descending-icon" alt="Arrow Down" className="arrow-down" src={arrowDown} onClick={() => sortTable("descending", header)} />
                                   </div>
                                 </div>
                               </th>
