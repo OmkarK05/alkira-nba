@@ -1,6 +1,12 @@
 import React from "react";
 import "./AppLoader.scoped.scss";
 
+/**
+ * This is global component to display loader
+ * Props : 
+ * fullScreen {Boolean} - to display loader on full screen
+ * message {String} - Message to be displayed while loading
+ */
 const AppLoader = (props) => {
 
   return(

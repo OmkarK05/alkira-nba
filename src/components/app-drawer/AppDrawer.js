@@ -2,6 +2,13 @@ import React, { useMemo } from "react";
 import "./AppDrawer.scoped.scss";
 import cross from "../../assets/icons/x.svg"
 
+/**
+ * This is global base app drawer component to display any data drawer
+ * Props : 
+ * direction {String} - right / left
+ * width {String} - in any unit e.g. 300px / 30%
+ * close {function} - Trigged to close the drawer
+ */
 const AppDrawer = (props) => {
   /**
      * Cached method to get drawer style. It computes and returns styles when props width or direction changes

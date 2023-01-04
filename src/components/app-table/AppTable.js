@@ -7,7 +7,14 @@ import arrowRight from "../../assets/icons/chevron-right.svg";
 import arrowLeft from "../../assets/icons/chevron-left.svg";
 import { deepCopy } from "../../global";
 
-
+/**
+ * This is global base table component to display any data in tablular format.
+ * It contains internal pagination and sorting
+ * Props : 
+ * table {Object} - structured data in table format
+ * handleRowClick {function} - triggered after clicking on any row
+ * pagination {Boolean} - to display or hide pagination
+ */
 const AppTable = (props) => {
   const [paginatedRows, setPaginatedRows] = useState(null);
   const [table, setTable] = useState(null);

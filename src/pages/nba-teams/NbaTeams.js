@@ -8,9 +8,16 @@ import { getNbaTeams, getNbaTeamGames } from "../../services/teams";
 import "./NbaTeams.scoped.scss"
 
 const NbaTeams = () => {
-  const [teamsData, setTeamsData] = useState(null);
+  // teamsTable contains teams data in structured table format, which is sent to AppTable to display teams table
+  const [teamsTable, setTeamsTable] = useState(null);
+
+  // teams contains teams array in strucutred table row format. As we filter teams this is used as reference for filtering.
+  // This should not be mutated or changed, as this is the main reference for teams
   const [teams, setTeams] = useState(null);
+
+  // teamGameDetails stores the teams details data to be shown in right side drawer
   const [teamGameDetails, setTeamGameDetails] = useState(null);
+
   const [showDrawer, setShowDrawer] = useState(false);
   const [showDrawerLoader, setShowDrawerLoader] = useState(false);
   const [loaderMessage, setLoaderMessage] = useState("");
@@ -19,34 +26,50 @@ const NbaTeams = () => {
     fetchNbaTeams();
   },[]);
 
+  /**
+   * Method to fetch nba teams.  This method makes api call to get teams data
+   */
   const fetchNbaTeams = () => {
     setShowDrawerLoader(true);
     setLoaderMessage("Getting Teams...");
     getNbaTeams().then((response) => {
-      const headers =  [
-        {name: "team_name", label: "Team Name"},
-        {name: "city", label: "City"},
-        {name: "abbreviation", label: "Abbreviation"},
-        {name: "conference", label: "Conference"},
-        {name: "division", label: "Division"},
-      ];
-      const formattedTeams = response["data"].map((team) => convertTeamIntoTableRow(team));
-      setTeams(formattedTeams);
-      const data = {
-        headers,
-        body: formattedTeams,
-        pagination: {}
-      };
-
-      data["pagination"] = {
-        current_page : 1,
-        total_pages : Math.ceil(response["data"].length / 7)
-      }
-            
-      setTeamsData(data);
+      setupTeamsTable(response["data"]);
     }).finally(() => setShowDrawerLoader(false))
   }
+
+  /**
+   * This method setup teams and teamsTable, converts teams response data into proper table structure to display in table
+   * @param {Array} teams - array of teams
+   */
+  const setupTeamsTable = (teams) => {
+    const headers =  [
+      {name: "team_name", label: "Team Name"},
+      {name: "city", label: "City"},
+      {name: "abbreviation", label: "Abbreviation"},
+      {name: "conference", label: "Conference"},
+      {name: "division", label: "Division"},
+    ];
+    const formattedTeams = teams.map((team) => convertTeamIntoTableRow(team));
+    setTeams(formattedTeams);
+    const data = {
+      headers,
+      body: formattedTeams,
+      pagination: {}
+    };
+
+    data["pagination"] = {
+      current_page : 1,
+      total_pages : Math.ceil(teams.length / 7)
+    }
+          
+    setTeamsTable(data);
+  }
     
+  /**
+   * This method converts team data into structured table row object
+   * @param {Object} team
+   * @returns {Object} - table row object
+   */
   const convertTeamIntoTableRow = (team) => {
     const row = {
       id: team["id"],
@@ -60,6 +83,10 @@ const NbaTeams = () => {
     return row;
   };
   
+  /**
+   * Method to get default object with required team details keys
+   * @returns {Object} 
+   */
   const getDefaultGameDetails = () => {
     return {
       date: "",
@@ -72,27 +99,24 @@ const NbaTeams = () => {
     }
   };
 
+  /**
+   * Method to filter teams on basis searched team name.
+   * @param {} teamName 
+   */
   const filterTeams = (teamName) => {
-    if(teamName && teamName.trim().length){
-      const searchResults = teams.filter((team) => team["cells"][0]["value"].toLowerCase().includes(teamName.toLowerCase()));
-      setTeamsData({
-        ...teamsData,
-        body: searchResults,
-        pagination: {
-          current_page : 1,
-          total_pages : Math.ceil(searchResults.length / 7)
-        }
-      })
-    } else {
-      setTeamsData({
-        ...teamsData,
-        body: teams,
-        pagination: {
-          current_page : 1,
-          total_pages : Math.ceil(teams.length / 7)
-        }
-      })  
+    let filteredTeams;
+    const shouldFilterTeams = teamName && teamName.trim().length;
+    if(shouldFilterTeams){
+      filteredTeams = teams.filter((team) => team["cells"][0]["value"].toLowerCase().includes(teamName.toLowerCase()));
     }
+    setTeamsTable({
+      ...teamsTable,
+      body: shouldFilterTeams ? filteredTeams : teams,
+      pagination: {
+        current_page : 1,
+        total_pages : Math.ceil(filteredTeams.length / 7)
+      }
+    })
   };
 
   const fetchTeamGames = (team) => {
@@ -140,7 +164,7 @@ const NbaTeams = () => {
         <SearchBar search={filterTeams} />
       </Col>
       <Col xl={10}>
-        <AppTable table={teamsData} pagination handleRowClick={fetchTeamGames} />
+        <AppTable table={teamsTable} pagination handleRowClick={fetchTeamGames} />
       </Col>
       {
         showDrawer && (
