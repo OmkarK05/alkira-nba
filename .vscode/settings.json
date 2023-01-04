@@ -1,0 +1,15 @@
+{
+    "editor.codeActionsOnSave": {
+    
+        
+        "source.fixAll.eslint": true
+    },
+    "eslint.validate": [
+        "javascript",
+        "jsx",
+        "html",
+        "css",
+        "scss"
+    ],
+    "editor.formatOnSave": true
+}
