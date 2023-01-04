@@ -321,13 +321,13 @@ describe("<NbaTeams />", () => {
     table.should("exist");
   });
 
-  it("Shoudl show only 1 row in table", () => {
+  it("Should show only 1 row in table when searched for Hawks", () => {
     let searchBar = cy.get("#search-bar-input-field");
     searchBar.type("Hawks");
     cy.get("tbody").find("tr").should("have.length", 1);
   });
 
-  it("Should show only Hawks row", () => {
+  it("Should show only Hawks row when searched for Hawks", () => {
     let searchBar = cy.get("#search-bar-input-field");
     searchBar.type("Hawks");        
     cy.get("tbody").find("tr").find("td").first().should("have.text", "Hawks");
@@ -383,6 +383,10 @@ describe("<NbaTeams />", () => {
       cy.get("#team-game-detail-visitor-team-score").find("#team-game-detail-visitor-team-score-value").should("have.text", "94");
     });
 
+    it("Should close drawer after clicking on close icon", () => {
+      cy.get("#app-drawer-header-close-button").click();
+      cy.get("#app-drawer").should("not.exist");
+    });
 
   })
 })

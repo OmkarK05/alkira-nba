@@ -682,12 +682,12 @@ describe("<AppTable />", () => {
       cy.get("#app-table-pagination-next-button").click();
     });
 
-    it("Should show next page data on clicking pagination next", () => {
+    it("Should show next page 7 rows on clicking pagination next", () => {
       const tableBodyRowElements = cy.get("tbody").find("tr");
       tableBodyRowElements.should("have.length", 7);
     })
 
-    it("Should show next page data on clicking pagination next", () => {
+    it("Should show next page rows data on clicking pagination next", () => {
       const tableBodyRowElements = cy.get("tbody").find("tr");
       let tableRows = dummyTable["body"].slice(7, 14);
       tableBodyRowElements.each((tr, index) => {
@@ -704,12 +704,12 @@ describe("<AppTable />", () => {
         cy.get("#app-table-pagination-previous-button").click();
       });
   
-      it("Should show next page data on clicking pagination next", () => {
+      it("Should show previous page 7 rows on clicking pagination next", () => {
         const tableBodyRowElements = cy.get("tbody").find("tr");
         tableBodyRowElements.should("have.length", 7);
       })
   
-      it("Should show next page data on clicking pagination next", () => {
+      it("Should show previous page rows data on clicking pagination next", () => {
         const tableBodyRowElements = cy.get("tbody").find("tr");
         let tableRows = dummyTable["body"].slice(0, 7);
         tableBodyRowElements.each((tr, index) => {
