@@ -3,272 +3,632 @@ import AppTable from "./AppTable";
 
 const dummyTable = {
   "headers": [
-    {
-      "name": "team_name",
-      "label": "Team Name"
-    },
-    {
-      "name": "city",
-      "label": "City"
-    },
-    {
-      "name": "abbreviation",
-      "label": "Abbreviation"
-    },
-    {
-      "name": "conference",
-      "label": "Conference"
-    },
-    {
-      "name": "division",
-      "label": "Division"
-    }
+      {
+          "name": "team_name",
+          "label": "Team Name"
+      },
+      {
+          "name": "city",
+          "label": "City"
+      },
+      {
+          "name": "abbreviation",
+          "label": "Abbreviation"
+      },
+      {
+          "name": "conference",
+          "label": "Conference"
+      },
+      {
+          "name": "division",
+          "label": "Division"
+      }
   ],
   "body": [
-    {
-      "team_name": "Hawks",
-      "city": "Atlanta",
-      "abbreviation": "ATL",
-      "conference": "East",
-      "division": "Southeast",
-      "id": 1
-    },
-    {
-      "team_name": "Celtics",
-      "city": "Boston",
-      "abbreviation": "BOS",
-      "conference": "East",
-      "division": "Atlantic",
-      "id": 2
-    },
-    {
-      "team_name": "Nets",
-      "city": "Brooklyn",
-      "abbreviation": "BKN",
-      "conference": "East",
-      "division": "Atlantic",
-      "id": 3
-    },
-    {
-      "team_name": "Hornets",
-      "city": "Charlotte",
-      "abbreviation": "CHA",
-      "conference": "East",
-      "division": "Southeast",
-      "id": 4
-    },
-    {
-      "team_name": "Bulls",
-      "city": "Chicago",
-      "abbreviation": "CHI",
-      "conference": "East",
-      "division": "Central",
-      "id": 5
-    },
-    {
-      "team_name": "Cavaliers",
-      "city": "Cleveland",
-      "abbreviation": "CLE",
-      "conference": "East",
-      "division": "Central",
-      "id": 6
-    },
-    {
-      "team_name": "Mavericks",
-      "city": "Dallas",
-      "abbreviation": "DAL",
-      "conference": "West",
-      "division": "Southwest",
-      "id": 7
-    },
-    {
-      "team_name": "Nuggets",
-      "city": "Denver",
-      "abbreviation": "DEN",
-      "conference": "West",
-      "division": "Northwest",
-      "id": 8
-    },
-    {
-      "team_name": "Pistons",
-      "city": "Detroit",
-      "abbreviation": "DET",
-      "conference": "East",
-      "division": "Central",
-      "id": 9
-    },
-    {
-      "team_name": "Warriors",
-      "city": "Golden State",
-      "abbreviation": "GSW",
-      "conference": "West",
-      "division": "Pacific",
-      "id": 10
-    },
-    {
-      "team_name": "Rockets",
-      "city": "Houston",
-      "abbreviation": "HOU",
-      "conference": "West",
-      "division": "Southwest",
-      "id": 11
-    },
-    {
-      "team_name": "Pacers",
-      "city": "Indiana",
-      "abbreviation": "IND",
-      "conference": "East",
-      "division": "Central",
-      "id": 12
-    },
-    {
-      "team_name": "Clippers",
-      "city": "LA",
-      "abbreviation": "LAC",
-      "conference": "West",
-      "division": "Pacific",
-      "id": 13
-    },
-    {
-      "team_name": "Lakers",
-      "city": "Los Angeles",
-      "abbreviation": "LAL",
-      "conference": "West",
-      "division": "Pacific",
-      "id": 14
-    },
-    {
-      "team_name": "Grizzlies",
-      "city": "Memphis",
-      "abbreviation": "MEM",
-      "conference": "West",
-      "division": "Southwest",
-      "id": 15
-    },
-    {
-      "team_name": "Heat",
-      "city": "Miami",
-      "abbreviation": "MIA",
-      "conference": "East",
-      "division": "Southeast",
-      "id": 16
-    },
-    {
-      "team_name": "Bucks",
-      "city": "Milwaukee",
-      "abbreviation": "MIL",
-      "conference": "East",
-      "division": "Central",
-      "id": 17
-    },
-    {
-      "team_name": "Timberwolves",
-      "city": "Minnesota",
-      "abbreviation": "MIN",
-      "conference": "West",
-      "division": "Northwest",
-      "id": 18
-    },
-    {
-      "team_name": "Pelicans",
-      "city": "New Orleans",
-      "abbreviation": "NOP",
-      "conference": "West",
-      "division": "Southwest",
-      "id": 19
-    },
-    {
-      "team_name": "Knicks",
-      "city": "New York",
-      "abbreviation": "NYK",
-      "conference": "East",
-      "division": "Atlantic",
-      "id": 20
-    },
-    {
-      "team_name": "Thunder",
-      "city": "Oklahoma City",
-      "abbreviation": "OKC",
-      "conference": "West",
-      "division": "Northwest",
-      "id": 21
-    },
-    {
-      "team_name": "Magic",
-      "city": "Orlando",
-      "abbreviation": "ORL",
-      "conference": "East",
-      "division": "Southeast",
-      "id": 22
-    },
-    {
-      "team_name": "76ers",
-      "city": "Philadelphia",
-      "abbreviation": "PHI",
-      "conference": "East",
-      "division": "Atlantic",
-      "id": 23
-    },
-    {
-      "team_name": "Suns",
-      "city": "Phoenix",
-      "abbreviation": "PHX",
-      "conference": "West",
-      "division": "Pacific",
-      "id": 24
-    },
-    {
-      "team_name": "Trail Blazers",
-      "city": "Portland",
-      "abbreviation": "POR",
-      "conference": "West",
-      "division": "Northwest",
-      "id": 25
-    },
-    {
-      "team_name": "Kings",
-      "city": "Sacramento",
-      "abbreviation": "SAC",
-      "conference": "West",
-      "division": "Pacific",
-      "id": 26
-    },
-    {
-      "team_name": "Spurs",
-      "city": "San Antonio",
-      "abbreviation": "SAS",
-      "conference": "West",
-      "division": "Southwest",
-      "id": 27
-    },
-    {
-      "team_name": "Raptors",
-      "city": "Toronto",
-      "abbreviation": "TOR",
-      "conference": "East",
-      "division": "Atlantic",
-      "id": 28
-    },
-    {
-      "team_name": "Jazz",
-      "city": "Utah",
-      "abbreviation": "UTA",
-      "conference": "West",
-      "division": "Northwest",
-      "id": 29
-    },
-    {
-      "team_name": "Wizards",
-      "city": "Washington",
-      "abbreviation": "WAS",
-      "conference": "East",
-      "division": "Southeast",
-      "id": 30
-    }
+      {
+          "id": 1,
+          "cells": [
+              {
+                  "value": "Hawks"
+              },
+              {
+                  "value": "Atlanta"
+              },
+              {
+                  "value": "ATL"
+              },
+              {
+                  "value": "East"
+              },
+              {
+                  "value": "Southeast"
+              }
+          ]
+      },
+      {
+          "id": 2,
+          "cells": [
+              {
+                  "value": "Celtics"
+              },
+              {
+                  "value": "Boston"
+              },
+              {
+                  "value": "BOS"
+              },
+              {
+                  "value": "East"
+              },
+              {
+                  "value": "Atlantic"
+              }
+          ]
+      },
+      {
+          "id": 3,
+          "cells": [
+              {
+                  "value": "Nets"
+              },
+              {
+                  "value": "Brooklyn"
+              },
+              {
+                  "value": "BKN"
+              },
+              {
+                  "value": "East"
+              },
+              {
+                  "value": "Atlantic"
+              }
+          ]
+      },
+      {
+          "id": 4,
+          "cells": [
+              {
+                  "value": "Hornets"
+              },
+              {
+                  "value": "Charlotte"
+              },
+              {
+                  "value": "CHA"
+              },
+              {
+                  "value": "East"
+              },
+              {
+                  "value": "Southeast"
+              }
+          ]
+      },
+      {
+          "id": 5,
+          "cells": [
+              {
+                  "value": "Bulls"
+              },
+              {
+                  "value": "Chicago"
+              },
+              {
+                  "value": "CHI"
+              },
+              {
+                  "value": "East"
+              },
+              {
+                  "value": "Central"
+              }
+          ]
+      },
+      {
+          "id": 6,
+          "cells": [
+              {
+                  "value": "Cavaliers"
+              },
+              {
+                  "value": "Cleveland"
+              },
+              {
+                  "value": "CLE"
+              },
+              {
+                  "value": "East"
+              },
+              {
+                  "value": "Central"
+              }
+          ]
+      },
+      {
+          "id": 7,
+          "cells": [
+              {
+                  "value": "Mavericks"
+              },
+              {
+                  "value": "Dallas"
+              },
+              {
+                  "value": "DAL"
+              },
+              {
+                  "value": "West"
+              },
+              {
+                  "value": "Southwest"
+              }
+          ]
+      },
+      {
+          "id": 8,
+          "cells": [
+              {
+                  "value": "Nuggets"
+              },
+              {
+                  "value": "Denver"
+              },
+              {
+                  "value": "DEN"
+              },
+              {
+                  "value": "West"
+              },
+              {
+                  "value": "Northwest"
+              }
+          ]
+      },
+      {
+          "id": 9,
+          "cells": [
+              {
+                  "value": "Pistons"
+              },
+              {
+                  "value": "Detroit"
+              },
+              {
+                  "value": "DET"
+              },
+              {
+                  "value": "East"
+              },
+              {
+                  "value": "Central"
+              }
+          ]
+      },
+      {
+          "id": 10,
+          "cells": [
+              {
+                  "value": "Warriors"
+              },
+              {
+                  "value": "Golden State"
+              },
+              {
+                  "value": "GSW"
+              },
+              {
+                  "value": "West"
+              },
+              {
+                  "value": "Pacific"
+              }
+          ]
+      },
+      {
+          "id": 11,
+          "cells": [
+              {
+                  "value": "Rockets"
+              },
+              {
+                  "value": "Houston"
+              },
+              {
+                  "value": "HOU"
+              },
+              {
+                  "value": "West"
+              },
+              {
+                  "value": "Southwest"
+              }
+          ]
+      },
+      {
+          "id": 12,
+          "cells": [
+              {
+                  "value": "Pacers"
+              },
+              {
+                  "value": "Indiana"
+              },
+              {
+                  "value": "IND"
+              },
+              {
+                  "value": "East"
+              },
+              {
+                  "value": "Central"
+              }
+          ]
+      },
+      {
+          "id": 13,
+          "cells": [
+              {
+                  "value": "Clippers"
+              },
+              {
+                  "value": "LA"
+              },
+              {
+                  "value": "LAC"
+              },
+              {
+                  "value": "West"
+              },
+              {
+                  "value": "Pacific"
+              }
+          ]
+      },
+      {
+          "id": 14,
+          "cells": [
+              {
+                  "value": "Lakers"
+              },
+              {
+                  "value": "Los Angeles"
+              },
+              {
+                  "value": "LAL"
+              },
+              {
+                  "value": "West"
+              },
+              {
+                  "value": "Pacific"
+              }
+          ]
+      },
+      {
+          "id": 15,
+          "cells": [
+              {
+                  "value": "Grizzlies"
+              },
+              {
+                  "value": "Memphis"
+              },
+              {
+                  "value": "MEM"
+              },
+              {
+                  "value": "West"
+              },
+              {
+                  "value": "Southwest"
+              }
+          ]
+      },
+      {
+          "id": 16,
+          "cells": [
+              {
+                  "value": "Heat"
+              },
+              {
+                  "value": "Miami"
+              },
+              {
+                  "value": "MIA"
+              },
+              {
+                  "value": "East"
+              },
+              {
+                  "value": "Southeast"
+              }
+          ]
+      },
+      {
+          "id": 17,
+          "cells": [
+              {
+                  "value": "Bucks"
+              },
+              {
+                  "value": "Milwaukee"
+              },
+              {
+                  "value": "MIL"
+              },
+              {
+                  "value": "East"
+              },
+              {
+                  "value": "Central"
+              }
+          ]
+      },
+      {
+          "id": 18,
+          "cells": [
+              {
+                  "value": "Timberwolves"
+              },
+              {
+                  "value": "Minnesota"
+              },
+              {
+                  "value": "MIN"
+              },
+              {
+                  "value": "West"
+              },
+              {
+                  "value": "Northwest"
+              }
+          ]
+      },
+      {
+          "id": 19,
+          "cells": [
+              {
+                  "value": "Pelicans"
+              },
+              {
+                  "value": "New Orleans"
+              },
+              {
+                  "value": "NOP"
+              },
+              {
+                  "value": "West"
+              },
+              {
+                  "value": "Southwest"
+              }
+          ]
+      },
+      {
+          "id": 20,
+          "cells": [
+              {
+                  "value": "Knicks"
+              },
+              {
+                  "value": "New York"
+              },
+              {
+                  "value": "NYK"
+              },
+              {
+                  "value": "East"
+              },
+              {
+                  "value": "Atlantic"
+              }
+          ]
+      },
+      {
+          "id": 21,
+          "cells": [
+              {
+                  "value": "Thunder"
+              },
+              {
+                  "value": "Oklahoma City"
+              },
+              {
+                  "value": "OKC"
+              },
+              {
+                  "value": "West"
+              },
+              {
+                  "value": "Northwest"
+              }
+          ]
+      },
+      {
+          "id": 22,
+          "cells": [
+              {
+                  "value": "Magic"
+              },
+              {
+                  "value": "Orlando"
+              },
+              {
+                  "value": "ORL"
+              },
+              {
+                  "value": "East"
+              },
+              {
+                  "value": "Southeast"
+              }
+          ]
+      },
+      {
+          "id": 23,
+          "cells": [
+              {
+                  "value": "76ers"
+              },
+              {
+                  "value": "Philadelphia"
+              },
+              {
+                  "value": "PHI"
+              },
+              {
+                  "value": "East"
+              },
+              {
+                  "value": "Atlantic"
+              }
+          ]
+      },
+      {
+          "id": 24,
+          "cells": [
+              {
+                  "value": "Suns"
+              },
+              {
+                  "value": "Phoenix"
+              },
+              {
+                  "value": "PHX"
+              },
+              {
+                  "value": "West"
+              },
+              {
+                  "value": "Pacific"
+              }
+          ]
+      },
+      {
+          "id": 25,
+          "cells": [
+              {
+                  "value": "Trail Blazers"
+              },
+              {
+                  "value": "Portland"
+              },
+              {
+                  "value": "POR"
+              },
+              {
+                  "value": "West"
+              },
+              {
+                  "value": "Northwest"
+              }
+          ]
+      },
+      {
+          "id": 26,
+          "cells": [
+              {
+                  "value": "Kings"
+              },
+              {
+                  "value": "Sacramento"
+              },
+              {
+                  "value": "SAC"
+              },
+              {
+                  "value": "West"
+              },
+              {
+                  "value": "Pacific"
+              }
+          ]
+      },
+      {
+          "id": 27,
+          "cells": [
+              {
+                  "value": "Spurs"
+              },
+              {
+                  "value": "San Antonio"
+              },
+              {
+                  "value": "SAS"
+              },
+              {
+                  "value": "West"
+              },
+              {
+                  "value": "Southwest"
+              }
+          ]
+      },
+      {
+          "id": 28,
+          "cells": [
+              {
+                  "value": "Raptors"
+              },
+              {
+                  "value": "Toronto"
+              },
+              {
+                  "value": "TOR"
+              },
+              {
+                  "value": "East"
+              },
+              {
+                  "value": "Atlantic"
+              }
+          ]
+      },
+      {
+          "id": 29,
+          "cells": [
+              {
+                  "value": "Jazz"
+              },
+              {
+                  "value": "Utah"
+              },
+              {
+                  "value": "UTA"
+              },
+              {
+                  "value": "West"
+              },
+              {
+                  "value": "Northwest"
+              }
+          ]
+      },
+      {
+          "id": 30,
+          "cells": [
+              {
+                  "value": "Wizards"
+              },
+              {
+                  "value": "Washington"
+              },
+              {
+                  "value": "WAS"
+              },
+              {
+                  "value": "East"
+              },
+              {
+                  "value": "Southeast"
+              }
+          ]
+      }
   ],
   "pagination": {
-    "current_page": 1,
-    "total_pages": 5
+      "current_page": 1,
+      "total_pages": 5
   }
 };
 
@@ -331,7 +691,7 @@ describe("<AppTable />", () => {
       const tableBodyRowElements = cy.get("tbody").find("tr");
       let tableRows = dummyTable["body"].slice(7, 14);
       tableBodyRowElements.each((tr, index) => {
-        cy.get(tr).find("td").first().should("have.text", tableRows[index]["team_name"]);
+        cy.get(tr).find("td").first().should("have.text", tableRows[index]['cells'][0]['value']);
       });
     })
 
@@ -353,7 +713,7 @@ describe("<AppTable />", () => {
         const tableBodyRowElements = cy.get("tbody").find("tr");
         let tableRows = dummyTable["body"].slice(0, 7);
         tableBodyRowElements.each((tr, index) => {
-          cy.get(tr).find("td").first().should("have.text", tableRows[index]["team_name"]);
+          cy.get(tr).find("td").first().should("have.text", tableRows[index]['cells'][0]['value']);
         });
       })
   
@@ -371,66 +731,150 @@ describe("<AppTable />", () => {
     it("Should sort table in ascending", () => {
       let sortedRows = [
         {
-          "team_name": "76ers",
-          "city": "Philadelphia",
-          "abbreviation": "PHI",
-          "conference": "East",
-          "division": "Atlantic",
-          "id": 23
+            "id": 23,
+            "cells": [
+                {
+                    "value": "76ers"
+                },
+                {
+                    "value": "Philadelphia"
+                },
+                {
+                    "value": "PHI"
+                },
+                {
+                    "value": "East"
+                },
+                {
+                    "value": "Atlantic"
+                }
+            ]
         },
         {
-          "team_name": "Bucks",
-          "city": "Milwaukee",
-          "abbreviation": "MIL",
-          "conference": "East",
-          "division": "Central",
-          "id": 17
+            "id": 17,
+            "cells": [
+                {
+                    "value": "Bucks"
+                },
+                {
+                    "value": "Milwaukee"
+                },
+                {
+                    "value": "MIL"
+                },
+                {
+                    "value": "East"
+                },
+                {
+                    "value": "Central"
+                }
+            ]
         },
         {
-          "team_name": "Bulls",
-          "city": "Chicago",
-          "abbreviation": "CHI",
-          "conference": "East",
-          "division": "Central",
-          "id": 5
+            "id": 5,
+            "cells": [
+                {
+                    "value": "Bulls"
+                },
+                {
+                    "value": "Chicago"
+                },
+                {
+                    "value": "CHI"
+                },
+                {
+                    "value": "East"
+                },
+                {
+                    "value": "Central"
+                }
+            ]
         },
         {
-          "team_name": "Cavaliers",
-          "city": "Cleveland",
-          "abbreviation": "CLE",
-          "conference": "East",
-          "division": "Central",
-          "id": 6
+            "id": 6,
+            "cells": [
+                {
+                    "value": "Cavaliers"
+                },
+                {
+                    "value": "Cleveland"
+                },
+                {
+                    "value": "CLE"
+                },
+                {
+                    "value": "East"
+                },
+                {
+                    "value": "Central"
+                }
+            ]
         },
         {
-          "team_name": "Celtics",
-          "city": "Boston",
-          "abbreviation": "BOS",
-          "conference": "East",
-          "division": "Atlantic",
-          "id": 2
+            "id": 2,
+            "cells": [
+                {
+                    "value": "Celtics"
+                },
+                {
+                    "value": "Boston"
+                },
+                {
+                    "value": "BOS"
+                },
+                {
+                    "value": "East"
+                },
+                {
+                    "value": "Atlantic"
+                }
+            ]
         },
         {
-          "team_name": "Clippers",
-          "city": "LA",
-          "abbreviation": "LAC",
-          "conference": "West",
-          "division": "Pacific",
-          "id": 13
+            "id": 13,
+            "cells": [
+                {
+                    "value": "Clippers"
+                },
+                {
+                    "value": "LA"
+                },
+                {
+                    "value": "LAC"
+                },
+                {
+                    "value": "West"
+                },
+                {
+                    "value": "Pacific"
+                }
+            ]
         },
         {
-          "team_name": "Grizzlies",
-          "city": "Memphis",
-          "abbreviation": "MEM",
-          "conference": "West",
-          "division": "Southwest",
-          "id": 15
+            "id": 15,
+            "cells": [
+                {
+                    "value": "Grizzlies"
+                },
+                {
+                    "value": "Memphis"
+                },
+                {
+                    "value": "MEM"
+                },
+                {
+                    "value": "West"
+                },
+                {
+                    "value": "Southwest"
+                }
+            ]
         }
       ]
 
       const tableBodyRowElements = cy.get("tbody").find("tr");
       tableBodyRowElements.each((tr, index) => {
-        cy.get(tr).find("td").first().should("have.text", sortedRows[index]["team_name"]);
+        cy.get(tr).find("td").first().should("have.text", sortedRows[index]['cells'][0]['value']);
       });
     })
   })
@@ -440,69 +884,153 @@ describe("<AppTable />", () => {
       cy.get("th").first().find("#app-table-sort-descending-icon").click();
     })
 
-    it("Should sort table in ascending", () => {
+    it("Should sort table in descending", () => {
       let sortedRows = [
         {
-          "team_name": "Wizards",
-          "city": "Washington",
-          "abbreviation": "WAS",
-          "conference": "East",
-          "division": "Southeast",
-          "id": 30
+            "id": 30,
+            "cells": [
+                {
+                    "value": "Wizards"
+                },
+                {
+                    "value": "Washington"
+                },
+                {
+                    "value": "WAS"
+                },
+                {
+                    "value": "East"
+                },
+                {
+                    "value": "Southeast"
+                }
+            ]
         },
         {
-          "team_name": "Warriors",
-          "city": "Golden State",
-          "abbreviation": "GSW",
-          "conference": "West",
-          "division": "Pacific",
-          "id": 10
+            "id": 10,
+            "cells": [
+                {
+                    "value": "Warriors"
+                },
+                {
+                    "value": "Golden State"
+                },
+                {
+                    "value": "GSW"
+                },
+                {
+                    "value": "West"
+                },
+                {
+                    "value": "Pacific"
+                }
+            ]
         },
         {
-          "team_name": "Trail Blazers",
-          "city": "Portland",
-          "abbreviation": "POR",
-          "conference": "West",
-          "division": "Northwest",
-          "id": 25
+            "id": 25,
+            "cells": [
+                {
+                    "value": "Trail Blazers"
+                },
+                {
+                    "value": "Portland"
+                },
+                {
+                    "value": "POR"
+                },
+                {
+                    "value": "West"
+                },
+                {
+                    "value": "Northwest"
+                }
+            ]
         },
         {
-          "team_name": "Timberwolves",
-          "city": "Minnesota",
-          "abbreviation": "MIN",
-          "conference": "West",
-          "division": "Northwest",
-          "id": 18
+            "id": 18,
+            "cells": [
+                {
+                    "value": "Timberwolves"
+                },
+                {
+                    "value": "Minnesota"
+                },
+                {
+                    "value": "MIN"
+                },
+                {
+                    "value": "West"
+                },
+                {
+                    "value": "Northwest"
+                }
+            ]
         },
         {
-          "team_name": "Thunder",
-          "city": "Oklahoma City",
-          "abbreviation": "OKC",
-          "conference": "West",
-          "division": "Northwest",
-          "id": 21
+            "id": 21,
+            "cells": [
+                {
+                    "value": "Thunder"
+                },
+                {
+                    "value": "Oklahoma City"
+                },
+                {
+                    "value": "OKC"
+                },
+                {
+                    "value": "West"
+                },
+                {
+                    "value": "Northwest"
+                }
+            ]
         },
         {
-          "team_name": "Suns",
-          "city": "Phoenix",
-          "abbreviation": "PHX",
-          "conference": "West",
-          "division": "Pacific",
-          "id": 24
+            "id": 24,
+            "cells": [
+                {
+                    "value": "Suns"
+                },
+                {
+                    "value": "Phoenix"
+                },
+                {
+                    "value": "PHX"
+                },
+                {
+                    "value": "West"
+                },
+                {
+                    "value": "Pacific"
+                }
+            ]
         },
         {
-          "team_name": "Spurs",
-          "city": "San Antonio",
-          "abbreviation": "SAS",
-          "conference": "West",
-          "division": "Southwest",
-          "id": 27
+            "id": 27,
+            "cells": [
+                {
+                    "value": "Spurs"
+                },
+                {
+                    "value": "San Antonio"
+                },
+                {
+                    "value": "SAS"
+                },
+                {
+                    "value": "West"
+                },
+                {
+                    "value": "Southwest"
+                }
+            ]
         }
       ]
 
       const tableBodyRowElements = cy.get("tbody").find("tr");
       tableBodyRowElements.each((tr, index) => {
-        cy.get(tr).find("td").first().should("have.text", sortedRows[index]["team_name"]);
+        cy.get(tr).find("td").first().should("have.text", sortedRows[index]['cells'][0]['value']);
       });
     })
   })
