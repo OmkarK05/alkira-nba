@@ -19,7 +19,6 @@ const AppTable = (props) => {
      */
   useEffect(() => {
     setTable(deepCopy(props["table"]));
-    console.log(props["table"]);
     props["table"] && props["table"]["body"] && setPaginatedRows(getPaginatedRows(deepCopy(props["table"]["body"]), currentPage));
   }, [props["table"]]);
 
@@ -41,7 +40,6 @@ const AppTable = (props) => {
       if(sortBy === "ascending") return a["cells"][headerIndex]["value"].localeCompare(b["cells"][headerIndex]["value"]);
       if(sortBy === "descending") return b["cells"][headerIndex]["value"].localeCompare(a["cells"][headerIndex]["value"]);
     });
-    console.log(getPaginatedRows(updateTable, currentPage));
     setTable({ ...table, body: updateTable });
     setPaginatedRows(getPaginatedRows(updateTable, currentPage));
   }
@@ -98,8 +96,8 @@ const AppTable = (props) => {
                           {header["label"]}
                         </p>
                         <div id="app-table-sorting-icon" className="table-column-sorting-icon">
-                          <img id="app-table-sort-ascending-icon" alt="Arrow up" className="arrow-up" src={arrowUp} onClick={() => sortTable("ascending", index)}/>
-                          <img id="app-table-sort-descending-icon" alt="Arrow Down" className="arrow-down" src={arrowDown} onClick={() => sortTable("descending", index)} />
+                          <img title="Sort Ascending" id="app-table-sort-ascending-icon" alt="Arrow up" className="arrow-up" src={arrowUp} onClick={() => sortTable("ascending", index)}/>
+                          <img title="Sort Descending" id="app-table-sort-descending-icon" alt="Arrow Down" className="arrow-down" src={arrowDown} onClick={() => sortTable("descending", index)} />
                         </div>
                       </div>
                     </th>
